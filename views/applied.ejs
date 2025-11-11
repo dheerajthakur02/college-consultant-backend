@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Application Submitted Successfully</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.5;
+        color: #333;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff4e0;
+      }
+      .container {
+        background-color: #ffffff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        color: #b34700;
+        margin: 0;
+        font-size: 20px;
+      }
+      .content {
+        text-align: left;
+      }
+      .info-box {
+        background-color: #fff3cd;
+        border-left: 4px solid #ff8c00;
+        padding: 12px;
+        margin: 15px 0;
+        font-size: 13px;
+        border-radius: 5px;
+        text-align: left;
+      }
+      .footer {
+        background: #d35400;
+        color: #fff;
+        text-align: center;
+        padding: 15px;
+        font-size: 12px;
+        border-radius: 0 0 10px 10px;
+      }
+      .footer .tagline {
+        margin-top: 8px;
+        font-size: 11px;
+        color: #ffe0b2;
+      }
+      .social-section {
+        background: #fff8f2;
+        padding: 15px;
+        text-align: center;
+        border-top: 1px solid #ffe6cc;
+        margin-top: 20px;
+        border-radius: 8px;
+      }
+      .social-section h3 {
+        color: #d35400;
+        font-size: 12px;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .social-link {
+        display: inline-block;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1.2px solid #ffd8b0;
+        box-shadow: 0 2px 5px rgba(255, 153, 51, 0.15);
+        text-decoration: none;
+      }
+      .social-link img {
+        width: 16px;
+        height: 16px;
+        display: block;
+        margin: 9px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <h1>✅ Application Submitted Successfully!</h1>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content">
+        <p>Hello <strong><%= studentName %></strong>,</p>
+        <p>
+          We are pleased to inform you that your application has been
+          <strong>successfully submitted</strong> to <strong><%= collegeName %></strong>
+          for the <strong><%= courseName %></strong> program.
+        </p>
+
+        <div class="info-box">
+          <strong>📄 Application Details</strong>
+          <ul style="margin: 8px 0; padding-left: 20px">
+            <li><strong>Application ID:</strong> <%= id %></li>
+            <li><strong>Student ID:</strong> <%= studentId %></li>
+            <li><strong>College ID:</strong> <%= collegeId %></li>
+            <li><strong>Course ID:</strong> <%= courseId %></li>
+          </ul>
+        </div>
+
+        <p style="margin-top: 20px">
+          Our team will review your application shortly. You can track its
+          progress in your dashboard anytime.
+        </p>
+
+        <p style="margin-top: 10px">
+          If you have any queries or require support, feel free to reach out to
+          us.
+        </p>
+      </div>
+
+      <!-- CONTACT INFO -->
+      <div style="margin-top: 20px; line-height: 1.5">
+        <p style="margin: 5px 0; color: #555"><strong>Regards,</strong></p>
+        <p style="margin: 5px 0">
+          Admissions Team - Black Army<br />
+          Office: 99 URBAN ESTATE 2 HISAR, HARYANA 125001<br />
+          Email:
+          <a
+            href="mailto:ceoblackarmy@gmail.com"
+            style="color: blue; text-decoration: none"
+            >ceoblackarmy@gmail.com</a
+          ><br />
+          Helpline:
+          <a href="tel:+919342293422" style="color: blue; text-decoration: none">
+            +91 93422 93422
+          </a>
+        </p>
+      </div>
+
+      <!-- SOCIAL LINKS -->
+      <div class="social-section">
+        <h3>Follow Black Army on</h3>
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" class="social-link">
+            <img
+              src="https://api.nagarparishadjhajha.in/uploads/icons/facebook.png"
+              alt="Facebook"
+            />
+          </a>
+          <a href="https://instagram.com" target="_blank" class="social-link">
+            <img
+              src="https://api.nagarparishadjhajha.in/uploads/icons/instagram.png"
+              alt="Instagram"
+            />
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="social-link">
+            <img
+              src="https://api.nagarparishadjhajha.in/uploads/icons/linkedin.png"
+              alt="LinkedIn"
+            />
+          </a>
+          <a href="https://twitter.com" target="_blank" class="social-link">
+            <img
+              src="https://api.nagarparishadjhajha.in/uploads/icons/twitter.png"
+              alt="Twitter"
+            />
+          </a>
+          <a href="https://youtube.com" target="_blank" class="social-link">
+            <img
+              src="https://api.nagarparishadjhajha.in/uploads/icons/youtube.png"
+              alt="YouTube"
+            />
+          </a>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <p><strong>Black Army</strong></p>
+        <p>Helpline: 1800-123-456</p>
+        <p>This is an automated email. Please do not reply.</p>
+        <p class="tagline">Your future starts here 🚀</p>
+      </div>
+    </div>
+  </body>
+</html>

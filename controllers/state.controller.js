@@ -29,7 +29,11 @@ export const createState = async (req, res) => {
 export const getAllStates = async (req, res) => {
   try {
     const states = await State.find();
-    res.status(200).json(states);
+    res.status(200).json({
+      message: "All states fetched successfully",
+      success: true,
+      data: states,
+    });
   } catch (error) {
     res
       .status(500)

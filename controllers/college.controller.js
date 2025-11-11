@@ -11,6 +11,9 @@ export const createCollege = async (req, res) => {
       districtId,
       approvedThrough,
       address,
+      authorisedPersonName,
+      authorisedPersonEmail,
+      authorisedPersonMobile,
     } = req.body;
 
     if (!name || !stateId || !districtId) {
@@ -38,6 +41,9 @@ export const createCollege = async (req, res) => {
       districtId,
       approvedThrough,
       address,
+      authorisedPersonName,
+      authorisedPersonEmail,
+      authorisedPersonMobile,
     });
 
     await newCollege.save();
@@ -57,7 +63,11 @@ export const createCollege = async (req, res) => {
 export const getAllColleges = async (req, res) => {
   try {
     const colleges = await College.find();
-    res.status(200).json(colleges);
+    res.status(200).json({
+      message: "All colleges fetched successfully",
+      success: true,
+      data: colleges,
+    });
   } catch (error) {
     res
       .status(500)
@@ -65,11 +75,11 @@ export const getAllColleges = async (req, res) => {
   }
 };
 
-// 🔵 Get a college by ID
+// 🔵 Get a single college by id
 export const getCollegeById = async (req, res) => {
   try {
     const { id } = req.params;
-    const college = await College.findById(id);
+    const college = await College.findOne({ id });
 
     if (!college) {
       return res.status(404).json({ message: "College not found" });
@@ -83,14 +93,13 @@ export const getCollegeById = async (req, res) => {
   }
 };
 
-// 🟠 Update a college by ID
+// 🟠 Update a college
 export const updateCollege = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const updatedCollege = await College.findByIdAndUpdate(id, req.body, {
+    const updatedCollege = await College.findOneAndUpdate({ id }, req.body, {
       new: true,
-      runValidators: true,
     });
 
     if (!updatedCollege) {
@@ -112,8 +121,8 @@ export const updateCollege = async (req, res) => {
 export const deleteCollege = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedCollege = await College.findByIdAndDelete(id);
 
+    const deletedCollege = await College.findOneAndDelete({ id });
     if (!deletedCollege) {
       return res.status(404).json({ message: "College not found" });
     }
@@ -123,26 +132,5 @@ export const deleteCollege = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error deleting college", error: error.message });
-  }
-};
-
-// 🔍 (Optional) Get colleges by state or district
-export const getCollegesByLocation = async (req, res) => {
-  try {
-    const { stateId, districtId } = req.query;
-    const filter = {};
-
-    if (stateId) filter.stateId = stateId;
-    if (districtId) filter.districtId = districtId;
-
-    const colleges = await College.find(filter);
-    res.status(200).json(colleges);
-  } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error fetching colleges by location",
-        error: error.message,
-      });
   }
 };

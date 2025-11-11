@@ -32,7 +32,11 @@ export const createStream = async (req, res) => {
 export const getAllStreams = async (req, res) => {
   try {
     const streams = await Stream.find();
-    res.status(200).json(streams);
+    res.status(200).json({
+      message: "All streams fetched successfully",
+      success: true,
+      data: streams,
+    });
   } catch (error) {
     res
       .status(500)

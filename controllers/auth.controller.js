@@ -2,7 +2,6 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 import setCookie from "../utils/setCookie.js";
-import { sendEmail } from "../utils/sendEmail.js";
 export const register = async (req, res) => {
   try {
     const { name, role, email, mobile, password, ...profileData } = req.body;
@@ -31,12 +30,6 @@ export const register = async (req, res) => {
       ...profileData,
     });
     await user.save();
-
-    await sendEmail(
-      email,
-      "Welcome to Consultancy",
-      `Hello ${name}, welcome aboard!`
-    );
     return res.status(201).json({
       message: "User registered successfully",
       success: true,
@@ -65,7 +58,6 @@ export const loginWithPassword = async (req, res) => {
     const user = await User.findOne({
       $or: [{ email }, { mobile }],
     });
-
     if (!user) {
       return res.status(404).json({
         message: "User not found",

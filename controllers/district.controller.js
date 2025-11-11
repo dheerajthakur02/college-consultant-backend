@@ -9,12 +9,6 @@ export const createDistrict = async (req, res) => {
       return res.status(400).json({ message: "Name and stateId are required" });
     }
 
-    // Optional: verify if the stateId exists
-    // const state = await State.findOne({ id: stateId });
-    // if (!state) {
-    //   return res.status(404).json({ message: "Invalid stateId" });
-    // }
-
     const existingDistrict = await District.findOne({ name, stateId });
     if (existingDistrict) {
       return res
@@ -40,7 +34,11 @@ export const createDistrict = async (req, res) => {
 export const getAllDistricts = async (req, res) => {
   try {
     const districts = await District.find();
-    res.status(200).json(districts);
+    res.status(200).json({
+      message: "All district fetched successfully",
+      success: true,
+      data: districts,
+    });
   } catch (error) {
     res
       .status(500)
