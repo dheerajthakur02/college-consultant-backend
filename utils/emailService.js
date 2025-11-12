@@ -6,6 +6,8 @@ import ejs from "ejs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
@@ -51,13 +53,21 @@ async function renderTemplate(templateName, data) {
   return await ejs.renderFile(templatePath, data);
 }
 
-async function sendMail(to, subject, text, html, shouldLog = true) {
+async function sendMail(
+  to,
+  subject,
+  text,
+  html,
+  attachments,
+  shouldLog = true
+) {
   const mailOptions = {
     from: process.env.MAIL_FROM,
     to,
     subject,
     text: text || (html ? html.replace(/<[^>]*>/g, "") : ""),
     html,
+    attachments,
   };
 
   let emailLog = null;
@@ -110,19 +120,32 @@ async function sendMail(to, subject, text, html, shouldLog = true) {
 
 export async function sendOnlyEmail({
   email,
-  text,
+  emailTemplate,
+  emailData,
   emailSubject,
+  attachments,
   shouldLog = true,
 }) {
   const result = { success: false, error: null };
 
-  if (email && text) {
+  if (email && emailTemplate) {
     try {
       // Render HTML template (tumhara existing template renderer)
-      //   const html = await renderTemplate(emailTemplate, emailData);
+      const html = await renderTemplate(emailTemplate, emailData);
 
       // Send email using your already configured sendMail()
-      await sendMail(email, emailSubject, text, null, shouldLog);
+      const readyAttachments = attachments.map((file) => ({
+        filename: file.filename,
+        path: path.join(__dirname, "..", file.path), // file.url = uploads/application/filename
+      }));
+      await sendMail(
+        email,
+        emailSubject,
+        null,
+        html,
+        readyAttachments,
+        shouldLog
+      );
 
       result.success = true;
       if (shouldLog) console.log(`✅ Email sent successfully to ${email}`);

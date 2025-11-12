@@ -2,30 +2,65 @@ import Application from "../models/application.model.js";
 import { sendOnlyEmail } from "../utils/emailService.js";
 import College from "../models/college.model.js";
 import User from "../models/user.model.js";
+import Course from "../models/course.model.js";
+import { application } from "express";
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // months are 0-based
+  const year = date.getFullYear();
+
+  return `${day}-${month}-${year}`;
+}
 
 export const createApplication = async (req, res) => {
   try {
-    const {
-      studentId,
-      collegeId,
-      courseId,
-      tenthMarksheet,
-      twlefthMarksheet,
-      aadharCard,
-      remarks,
-    } = req.body;
+    const { studentId, collegeId, courseId, remarks } = req.body;
 
     if (!studentId || !collegeId || !courseId) {
       return res
         .status(400)
         .json({ message: "studentId, collegeId, and courseId are required" });
     }
+    const getFileName = (fileURLToPath) => {
+      const arr = fileURLToPath.split("/");
+      return arr[arr.length - 1];
+    };
+    const tenthMarksheet = req?.tenthMarksheet[0] || "";
+    const tenthMarksheetFileName = getFileName(tenthMarksheet);
+    console.log("10 m", tenthMarksheet);
+    const tenthPassingCertificate = req?.tenthPassingCertificate[0] || "";
+    const tenthPassingFileName = getFileName(tenthPassingCertificate);
+    console.log("10 p", tenthPassingCertificate);
+
+    const twlefthMarksheet = req?.twlefthMarksheet[0] || "";
+    const twlefthMarksheetFileName = getFileName(twlefthMarksheet);
+    console.log("12 m", twlefthMarksheet);
+    const twlefthPassingCertificate = req?.twlefthPassingCertificate[0] || "";
+    const twlefthPassingCertificateFileName = getFileName(
+      twlefthPassingCertificate
+    );
+    console.log("12 p", twlefthPassingCertificate);
+
+    const passportSizePhoto = req?.passportSizePhoto[0] || "";
+    console.log("passport", passportSizePhoto);
+    const passportSizePhotoFileName = getFileName(passportSizePhoto);
+
+    const aadharCard = req?.aadharCard[0] || "";
+    const aadharCardFileName = getFileName(aadharCard);
+    console.log("adharcard", aadharCard);
+
     const newApplication = new Application({
       studentId,
       collegeId,
       courseId,
       tenthMarksheet,
+      tenthPassingCertificate,
       twlefthMarksheet,
+      twlefthPassingCertificate,
+      passportSizePhoto,
       aadharCard,
       remarks,
     });
@@ -33,12 +68,60 @@ export const createApplication = async (req, res) => {
     await newApplication.save();
     const college = await College.findOne({ id: collegeId });
     const student = await User.findOne({ id: studentId });
+    const course = await Course.findOne({ id: courseId });
+    // const attachmentDocumtes = [];
+    // if (passportSizePhoto) {
+    //   attachmentDocumtes.push({
+    //     filename: passportSizePhotoFileName,
+    //     path: passportSizePhoto,
+    //   });
+    // }
 
     try {
       await sendOnlyEmail({
         email: college.authorisedPersonEmail,
         emailSubject: "Student information applied for the admission",
-        text: `Student Name :${student.name} with StudentId: ${student.id}, have apllied in your college: ${college.name}  in Course name: MBBS`,
+        emailTemplate: "applied.ejs",
+        emailData: {
+          applicationId: newApplication.applicationId,
+          studentName: student.name,
+          courseName: course.name,
+          collegeName: college.name,
+          dob: formatDate(student.dob),
+          email: student.email,
+          mobile: student.mobile,
+          gender: student.gender,
+          fatherName: student.fatherName,
+          motherName: student.motherName,
+          address: student.address,
+          city: student.city,
+          state: student.state,
+          pincode: student.pincode,
+          twelfthPercentage: student.twelfthPercentage,
+          tenthPercentage: student.tenthPercentage,
+        },
+        attachments: [
+          {
+            filename: tenthMarksheetFileName,
+            path: tenthMarksheet,
+          },
+          {
+            filename: tenthPassingFileName,
+            path: tenthPassingCertificate,
+          },
+          {
+            filename: tenthMarksheetFileName,
+            path: tenthMarksheet,
+          },
+          {
+            filename: twlefthMarksheetFileName,
+            path: twlefthMarksheet,
+          },
+          {
+            filename: twlefthPassingCertificateFileName,
+            path: twlefthPassingCertificate,
+          },
+        ],
       });
     } catch (notificationError) {
       console.error("send detais to college failed:", notificationError);

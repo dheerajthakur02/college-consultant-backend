@@ -58,6 +58,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "India",
     },
+    pincode: {
+      type: String,
+    },
     tenthPercentage: {
       type: Number,
     },

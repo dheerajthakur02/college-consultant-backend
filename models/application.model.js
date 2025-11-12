@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 import { v4 as uuidv4 } from "uuid";
-
+import generateApplicationNumber from "../utils/generateApplicationNumber.js";
 const applicationSchema = new mongoose.Schema(
   {
     id: {
       type: String,
       default: () => `application-${uuidv4()}`,
       unique: true,
+    },
+    applicationId: {
+      type: String,
+      default: generateApplicationNumber(),
     },
     studentId: {
       type: String,
@@ -28,7 +32,16 @@ const applicationSchema = new mongoose.Schema(
     tenthMarksheet: {
       type: String,
     },
+    tenthPassingCertificate: {
+      type: String,
+    },
     twlefthMarksheet: {
+      type: String,
+    },
+    twlefthPassingCertificate: {
+      type: String,
+    },
+    passportSizePhoto: {
       type: String,
     },
     aadharCard: {

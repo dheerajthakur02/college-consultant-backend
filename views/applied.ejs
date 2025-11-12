@@ -6,89 +6,130 @@
     <title>Application Submitted Successfully</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        line-height: 1.5;
-        color: #333;
-        max-width: 600px;
-        margin: 0 auto;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background-color: #e8f4fb;
+        color: #1a1a1a;
+        margin: 0;
         padding: 20px;
-        background-color: #fff4e0;
       }
+
       .container {
         background-color: #ffffff;
-        padding: 25px;
         border-radius: 10px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 650px;
+        margin: 0 auto;
+        box-shadow: 0 4px 15px rgba(0, 64, 128, 0.1);
+        overflow: hidden;
+        border-top: 6px solid #0056b3;
       }
+
       .header {
+        background: linear-gradient(90deg, #004080, #007bff);
+        color: #fff;
+        padding: 20px;
         text-align: center;
-        margin-bottom: 20px;
       }
+
       .header h1 {
-        color: #b34700;
         margin: 0;
         font-size: 20px;
+        letter-spacing: 0.5px;
       }
+
       .content {
-        text-align: left;
+        padding: 25px;
+        line-height: 1.6;
       }
+
+      .content p {
+        font-size: 14px;
+        margin: 8px 0;
+      }
+
       .info-box {
-        background-color: #fff3cd;
-        border-left: 4px solid #ff8c00;
-        padding: 12px;
-        margin: 15px 0;
-        font-size: 13px;
-        border-radius: 5px;
-        text-align: left;
+        background-color: #f0f8ff;
+        border-left: 4px solid #007bff;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 20px 0;
       }
+
+      .info-box strong {
+        color: #004080;
+      }
+
+      .info-box ul {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+        font-size: 13px;
+      }
+
+      .info-box li {
+        margin: 5px 0;
+        padding: 6px 0;
+        border-bottom: 1px solid #e3e9f0;
+      }
+
       .footer {
-        background: #d35400;
+        background: #004080;
         color: #fff;
         text-align: center;
         padding: 15px;
         font-size: 12px;
-        border-radius: 0 0 10px 10px;
       }
+
+      .footer a {
+        color: #80d4ff;
+        text-decoration: none;
+      }
+
       .footer .tagline {
+        color: #cce6ff;
         margin-top: 8px;
-        font-size: 11px;
-        color: #ffe0b2;
       }
+
       .social-section {
-        background: #fff8f2;
-        padding: 15px;
+        background: #f8fbff;
+        padding: 20px;
         text-align: center;
-        border-top: 1px solid #ffe6cc;
-        margin-top: 20px;
-        border-radius: 8px;
+        border-top: 1px solid #e3f2fd;
       }
+
       .social-section h3 {
-        color: #d35400;
-        font-size: 12px;
-        margin-bottom: 10px;
-        font-weight: 600;
+        color: #004080;
+        font-size: 13px;
+        margin-bottom: 12px;
       }
+
       .social-links {
         display: flex;
         justify-content: center;
         gap: 8px;
         flex-wrap: wrap;
       }
+
       .social-link {
         display: inline-block;
         width: 34px;
         height: 34px;
         border-radius: 50%;
-        background: #fff;
-        border: 1.2px solid #ffd8b0;
-        box-shadow: 0 2px 5px rgba(255, 153, 51, 0.15);
+        background: #ffffff;
+        border: 1.2px solid #007bff50;
+        box-shadow: 0 2px 5px rgba(0, 64, 128, 0.1);
         text-decoration: none;
       }
+
       .social-link img {
         width: 16px;
         height: 16px;
         display: block;
         margin: 9px auto;
+      }
+
+      .highlight {
+        color: #007bff;
+        font-weight: 600;
       }
     </style>
   </head>
@@ -96,61 +137,70 @@
     <div class="container">
       <!-- HEADER -->
       <div class="header">
-        <h1>✅ Application Submitted Successfully!</h1>
+        <h1>✅ Student Application Received Successfully</h1>
       </div>
 
       <!-- CONTENT -->
       <div class="content">
-        <p>Hello <strong><%= studentName %></strong>,</p>
+        <p>Dear <strong>Sir/Madam</strong>,</p>
         <p>
-          We are pleased to inform you that your application has been
-          <strong>successfully submitted</strong> to <strong><%= collegeName %></strong>
-          for the <strong><%= courseName %></strong> program.
+          We are delighted to inform you that a new application has been
+          <strong>successfully submitted</strong> for admission to your college,
+          <span class="highlight"><%= collegeName %></span>,
+          under the program
+          <span class="highlight"><%= courseName %></span>.
         </p>
 
         <div class="info-box">
-          <strong>📄 Application Details</strong>
-          <ul style="margin: 8px 0; padding-left: 20px">
-            <li><strong>Application ID:</strong> <%= id %></li>
-            <li><strong>Student ID:</strong> <%= studentId %></li>
-            <li><strong>College ID:</strong> <%= collegeId %></li>
-            <li><strong>Course ID:</strong> <%= courseId %></li>
+          <strong>📄 Student Application Details</strong>
+          <ul>
+            <li><strong>Application ID:</strong> <%= applicationId %></li>
+            <li><strong>Student Name:</strong> <%= studentName %></li>
+            <li><strong>Course Name:</strong> <%= courseName %></li>
+            <li><strong>Date of Birth:</strong> <%= dob %></li>
+            <li><strong>Email:</strong> <%= email %></li>
+            <li><strong>Mobile:</strong> <%= mobile %></li>
+            <li><strong>Gender:</strong> <%= gender %></li>
+            <li><strong>Father's Name:</strong> <%= fatherName %></li>
+            <li><strong>Mother's Name:</strong> <%= motherName %></li>
+            <li><strong>Address:</strong> <%= address %></li>
+            <li><strong>City:</strong> <%= city %></li>
+            <li><strong>State:</strong> <%= state %></li>
+            <li><strong>Pincode:</strong> <%= pincode %></li>
+            <li><strong>Class 10th Percentage:</strong> <%= tenthPercentage %></li>
+            <li><strong>Class 12th Percentage:</strong> <%= twelfthPercentage %></li>
           </ul>
         </div>
 
-        <p style="margin-top: 20px">
-          Our team will review your application shortly. You can track its
-          progress in your dashboard anytime.
+        <p>
+          The student's documents have been attached for your review. Please
+          verify and process the admission request at your earliest
+          convenience.
         </p>
 
-        <p style="margin-top: 10px">
-          If you have any queries or require support, feel free to reach out to
-          us.
+        <p>
+          You can also track this application in the
+          <strong>College Connect Portal</strong>.
         </p>
       </div>
 
       <!-- CONTACT INFO -->
-      <div style="margin-top: 20px; line-height: 1.5">
-        <p style="margin: 5px 0; color: #555"><strong>Regards,</strong></p>
-        <p style="margin: 5px 0">
-          Admissions Team - Black Army<br />
-          Office: 99 URBAN ESTATE 2 HISAR, HARYANA 125001<br />
+      <div style="background:#f4f9ff;padding:20px;border-top:1px solid #dceeff;">
+        <p style="margin:5px 0;"><strong>Warm Regards,</strong></p>
+        <p style="margin:5px 0;">
+          <strong>Admissions Team — College Connect</strong><br />
+          Patna, Bihar - 800001 <br />
           Email:
-          <a
-            href="mailto:ceoblackarmy@gmail.com"
-            style="color: blue; text-decoration: none"
-            >ceoblackarmy@gmail.com</a
-          ><br />
+          <a href="mailto:info@collegeconnectt.com">info@collegeconnectt.com</a>
+          <br />
           Helpline:
-          <a href="tel:+919342293422" style="color: blue; text-decoration: none">
-            +91 93422 93422
-          </a>
+          <a href="tel:+919342293422">+91 93422 93422</a>
         </p>
       </div>
 
       <!-- SOCIAL LINKS -->
       <div class="social-section">
-        <h3>Follow Black Army on</h3>
+        <h3>Follow College Connect</h3>
         <div class="social-links">
           <a href="https://facebook.com" target="_blank" class="social-link">
             <img
@@ -187,10 +237,10 @@
 
       <!-- FOOTER -->
       <div class="footer">
-        <p><strong>Black Army</strong></p>
-        <p>Helpline: 1800-123-456</p>
+        <p><strong>College Connect</strong></p>
+        <p>Helpline: +91 76676 56421</p>
         <p>This is an automated email. Please do not reply.</p>
-        <p class="tagline">Your future starts here 🚀</p>
+        <p class="tagline">Empowering admissions with trust 💙</p>
       </div>
     </div>
   </body>
