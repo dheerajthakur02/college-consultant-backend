@@ -69,14 +69,6 @@ export const createApplication = async (req, res) => {
     const college = await College.findOne({ id: collegeId });
     const student = await User.findOne({ id: studentId });
     const course = await Course.findOne({ id: courseId });
-    // const attachmentDocumtes = [];
-    // if (passportSizePhoto) {
-    //   attachmentDocumtes.push({
-    //     filename: passportSizePhotoFileName,
-    //     path: passportSizePhoto,
-    //   });
-    // }
-
     try {
       await sendOnlyEmail({
         email: college.authorisedPersonEmail,
