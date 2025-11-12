@@ -2,7 +2,7 @@ import Application from "../models/application.model.js";
 import { sendOnlyEmail } from "../utils/emailService.js";
 import College from "../models/college.model.js";
 import User from "../models/user.model.js";
-// 🟢 Create a new application
+
 export const createApplication = async (req, res) => {
   try {
     const {
@@ -37,16 +37,8 @@ export const createApplication = async (req, res) => {
     try {
       await sendOnlyEmail({
         email: college.authorisedPersonEmail,
-        emailTemplate: "applied.ejs",
-        emailData: {
-          id: student.id,
-          studentName: student.name,
-          collegeName: college.name,
-          studentId,
-          collegeId,
-          courseId,
-          courseName: "MBBS",
-        },
+        emailSubject: "Student information applied for the admission",
+        text: `Student Name :${student.name} with StudentId: ${student.id}, have apllied in your college: ${college.name}  in Course name: MBBS`,
       });
     } catch (notificationError) {
       console.error("send detais to college failed:", notificationError);
@@ -63,7 +55,6 @@ export const createApplication = async (req, res) => {
   }
 };
 
-// 🟡 Get all applications
 export const getAllApplications = async (req, res) => {
   try {
     const applications = await Application.find();
@@ -79,7 +70,6 @@ export const getAllApplications = async (req, res) => {
   }
 };
 
-// 🔵 Get a single application by id
 export const getApplicationById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -97,7 +87,6 @@ export const getApplicationById = async (req, res) => {
   }
 };
 
-// 🟠 Update application status or details
 export const updateApplication = async (req, res) => {
   try {
     const { id } = req.params;
@@ -125,7 +114,6 @@ export const updateApplication = async (req, res) => {
   }
 };
 
-// 🔴 Delete an application
 export const deleteApplication = async (req, res) => {
   try {
     const { id } = req.params;

@@ -30,7 +30,6 @@ export const createDistrict = async (req, res) => {
   }
 };
 
-// 🟡 Get all districts
 export const getAllDistricts = async (req, res) => {
   try {
     const districts = await District.find();
@@ -46,7 +45,6 @@ export const getAllDistricts = async (req, res) => {
   }
 };
 
-// 🔵 Get a single district by ID
 export const getDistrictById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -64,7 +62,6 @@ export const getDistrictById = async (req, res) => {
   }
 };
 
-// 🟠 Update a district
 export const updateDistrict = async (req, res) => {
   try {
     const { id } = req.params;
@@ -91,7 +88,6 @@ export const updateDistrict = async (req, res) => {
   }
 };
 
-// 🔴 Delete a district
 export const deleteDistrict = async (req, res) => {
   try {
     const { id } = req.params;

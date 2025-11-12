@@ -1,6 +1,5 @@
 import College from "../models/college.model.js";
 
-// 🟢 Create a new college
 export const createCollege = async (req, res) => {
   try {
     const {
@@ -59,7 +58,6 @@ export const createCollege = async (req, res) => {
   }
 };
 
-// 🟡 Get all colleges
 export const getAllColleges = async (req, res) => {
   try {
     const colleges = await College.find();
@@ -75,7 +73,6 @@ export const getAllColleges = async (req, res) => {
   }
 };
 
-// 🔵 Get a single college by id
 export const getCollegeById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -93,7 +90,6 @@ export const getCollegeById = async (req, res) => {
   }
 };
 
-// 🟠 Update a college
 export const updateCollege = async (req, res) => {
   try {
     const { id } = req.params;
@@ -117,7 +113,6 @@ export const updateCollege = async (req, res) => {
   }
 };
 
-// 🔴 Delete a college
 export const deleteCollege = async (req, res) => {
   try {
     const { id } = req.params;

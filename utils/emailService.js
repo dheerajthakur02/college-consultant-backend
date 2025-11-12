@@ -110,20 +110,19 @@ async function sendMail(to, subject, text, html, shouldLog = true) {
 
 export async function sendOnlyEmail({
   email,
-  emailTemplate,
-  emailData,
+  text,
   emailSubject,
   shouldLog = true,
 }) {
   const result = { success: false, error: null };
 
-  if (email && emailTemplate) {
+  if (email && text) {
     try {
       // Render HTML template (tumhara existing template renderer)
-      const html = await renderTemplate(emailTemplate, emailData);
+      //   const html = await renderTemplate(emailTemplate, emailData);
 
       // Send email using your already configured sendMail()
-      await sendMail(email, emailSubject, null, html, shouldLog);
+      await sendMail(email, emailSubject, text, null, shouldLog);
 
       result.success = true;
       if (shouldLog) console.log(`✅ Email sent successfully to ${email}`);

@@ -1,6 +1,5 @@
 import Course from "../models/course.model.js";
 
-// 🟢 Create a new course
 export const createCourse = async (req, res) => {
   try {
     const { name, streamId } = req.body;
@@ -11,7 +10,6 @@ export const createCourse = async (req, res) => {
         .json({ message: "name and streamId are required" });
     }
 
-    // Check for duplicate
     const existingCourse = await Course.findOne({ name, streamId });
     if (existingCourse) {
       return res
@@ -33,7 +31,6 @@ export const createCourse = async (req, res) => {
   }
 };
 
-// 🟡 Get all courses
 export const getAllCourses = async (req, res) => {
   try {
     const courses = await Course.find();
@@ -49,7 +46,6 @@ export const getAllCourses = async (req, res) => {
   }
 };
 
-// 🔵 Get a course by ID
 export const getCourseById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -67,7 +63,6 @@ export const getCourseById = async (req, res) => {
   }
 };
 
-// 🟠 Update a course
 export const updateCourse = async (req, res) => {
   try {
     const { id } = req.params;
@@ -94,7 +89,6 @@ export const updateCourse = async (req, res) => {
   }
 };
 
-// 🔴 Delete a course
 export const deleteCourse = async (req, res) => {
   try {
     const { id } = req.params;
@@ -112,7 +106,6 @@ export const deleteCourse = async (req, res) => {
   }
 };
 
-// 🔍 Get all courses by stream ID
 export const getCoursesByStream = async (req, res) => {
   try {
     const { streamId } = req.params;

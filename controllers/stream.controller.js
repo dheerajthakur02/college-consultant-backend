@@ -1,6 +1,5 @@
 import Stream from "../models/stream.model.js";
 
-// 🟢 Create a new stream
 export const createStream = async (req, res) => {
   try {
     const { name, about } = req.body;
@@ -28,7 +27,6 @@ export const createStream = async (req, res) => {
   }
 };
 
-// 🟡 Get all streams
 export const getAllStreams = async (req, res) => {
   try {
     const streams = await Stream.find();
@@ -44,7 +42,6 @@ export const getAllStreams = async (req, res) => {
   }
 };
 
-// 🔵 Get a single stream by ID
 export const getStreamById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -62,7 +59,6 @@ export const getStreamById = async (req, res) => {
   }
 };
 
-// 🟠 Update a stream
 export const updateStream = async (req, res) => {
   try {
     const { id } = req.params;
@@ -89,7 +85,6 @@ export const updateStream = async (req, res) => {
   }
 };
 
-// 🔴 Delete a stream
 export const deleteStream = async (req, res) => {
   try {
     const { id } = req.params;
