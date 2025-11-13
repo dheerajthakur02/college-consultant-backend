@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Application Submitted Successfully</title>
+    <title>New Student Application Received</title>
     <style>
       body {
         font-family: "Segoe UI", Arial, sans-serif;
@@ -131,13 +131,17 @@
         color: #007bff;
         font-weight: 600;
       }
+      .img-logo{
+        border-radius:7px;
+        }
     </style>
   </head>
   <body>
     <div class="container">
       <!-- HEADER -->
       <div class="header">
-        <h1>✅ Student Application Received Successfully</h1>
+       <img  class="img-logo" src="https://collegeconnectt.com/wp-content/uploads/2025/06/Untitled-1-2048x1388.jpg" height="50px">
+        <h1>New Student Application Received</h1>
       </div>
 
       <!-- CONTENT -->
@@ -167,8 +171,6 @@
             <li><strong>City:</strong> <%= city %></li>
             <li><strong>State:</strong> <%= state %></li>
             <li><strong>Pincode:</strong> <%= pincode %></li>
-            <li><strong>Class 10th Percentage:</strong> <%= tenthPercentage %></li>
-            <li><strong>Class 12th Percentage:</strong> <%= twelfthPercentage %></li>
           </ul>
         </div>
 
